@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-aa_t!fir+h569-^$mz%dwclydwtfr*q167)4%@^y@ve&fftw#l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Packages
+    'corsheaders',
     'rest_framework',
+    'versatileimagefield',
     # Apps
     'user',
+    'map',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -78,8 +82,12 @@ WSGI_APPLICATION = 'AdaptedMap.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'adaptedmap',
+        'USER': 'namper',
+        'HOST': 'localhost',
+        'PASSWORD': '1',
+        'PORT': 5432,
     }
 }
 
@@ -161,3 +169,5 @@ REST_FRAMEWORK = {
     },
 
 }
+
+CORS_ALLOW_ALL_ORIGINS = True

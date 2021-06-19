@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required as lr
 from django.urls import path, include
@@ -26,9 +28,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('jet/', include('jet.urls', 'jet')),
     path('api/user/', include('user.urls')),
+    path('api/map/', include('map.urls')),
     path('openapi/',
          get_schema_view(
-             title="Graey Education",
+             title="Adapted Map",
              description="API",
              authentication_classes=[SessionAuthentication],
              permission_classes=[IsAuthenticated],
@@ -47,3 +50,9 @@ urlpatterns = [
              ),
          ), name='swagger-ui')
 ]
+
+if settings.DEBUG:
+    # -- Static Serving
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT
+    ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
