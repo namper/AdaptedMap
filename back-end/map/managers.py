@@ -21,4 +21,4 @@ class MarkerQuerySet(QuerySet):
 
         return self.annotate(
             distance=6371 * c
-        )
+        ).filter(distance__lte=max_distance)
