@@ -16,7 +16,6 @@ class MarkerListView(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         serializer = CreateMarkerSerializer(data=request.data)
-        print(serializer.initial_data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)

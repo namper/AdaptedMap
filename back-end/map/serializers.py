@@ -61,6 +61,7 @@ class MarkerImageSerializer(ModelSerializer):
         sizes=[
             ('full_size', 'url'),
             ('slider', 'crop__431x431'),
+            ('thumbnail', 'thumbnail__400x400')
         ]
     )
 
