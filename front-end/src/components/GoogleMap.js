@@ -120,7 +120,7 @@ const MapCountainer = (props) => {
       activeMarker: marker,
       showingInfoWindow: true,
     });
-    getLocationByLatLng({ lat: marker.position.lat, lng: marker.position.lng });
+    getLocationByLatLng({ lat: marker.lat, lng: marker.lng });
   };
   const onMapClicked = (props) => {
     if (state.showingInfoWindow) {
@@ -151,7 +151,7 @@ const MapCountainer = (props) => {
         formData2,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      console.log("response===>", response2);
+      setState({ ...state, takingPhoto: false });
     } catch (e) {
       console.log("error---->", Object.keys(e));
       console.log(e.toJSON());
@@ -235,9 +235,9 @@ const MapCountainer = (props) => {
   };
 
   const checkCurrentMarkers = async () => {
-    const response = await axios.post(`${apiUrl}/api/map/markers/`);
-    console.log("----->", response);
-    setAllMarkers(response.data);
+    // const response = await axios.post(`${apiUrl}/api/map/markers/`);
+    // console.log("----->", response);
+    // setAllMarkers(response.data);
     setState({ ...state, takingPhoto: true });
   };
 
@@ -318,11 +318,10 @@ const MapCountainer = (props) => {
                 }}
               >
                 {allMarkers?.map((marker) => {
-                  console.log("m", marker);
                   return (
                     <Marker
                       key={Math.random()}
-                      onClick={onMarkerClick}
+                      onClick={() => onMarkerClick(null, marker)}
                       name={marker.name}
                       position={{
                         lat: marker?.lat,
@@ -351,8 +350,9 @@ const MapCountainer = (props) => {
               </Map>
               {state.showingInfoWindow ? (
                 <div className={"details-wrapper"}>
-                  {state.activeMarker?.photo ? (
-                    <img src={state.activeMarker?.photo} />
+                  {console.log("state", state.activeMarker)}
+                  {state.activeMarker?.image ? (
+                    <img src={state.activeMarker?.image} />
                   ) : (
                     <div className="details-no-imgs">No images</div>
                   )}

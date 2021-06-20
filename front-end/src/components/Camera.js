@@ -75,7 +75,7 @@ export const Camera = ({ addMarkerToMap }) => {
             const img = document.getElementById("download-photo");
             img.style.display = "block";
             webCamRef.current.stop();
-            console.log("---", picture);
+
             setPicture(picture);
           }}
         >
