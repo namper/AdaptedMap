@@ -21,7 +21,7 @@ const MapCountainer = (props) => {
 
   useEffect(async () => {
     console.log("------------------->");
-    const response = await axios.get(`${apiUrl}/api/map/markers`);
+    const response = await axios.get(`${apiUrl}/api/map/markers/`);
     setAllMarkers(response.data);
     console.log("reponse", response);
   }, []);
