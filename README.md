@@ -1,2 +1,2 @@
 # AdaptedMap
-Adapted Map
+GITA HACKATON: Adapted Map
