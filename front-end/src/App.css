@@ -1,0 +1,133 @@
+.App {
+  text-align: center;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.map {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0;
+}
+
+.details-wrapper {
+  position: fixed;
+  height: 300px;
+  border: 6px solid red;
+  width: 100%;
+
+  background-color: white;
+  bottom: 0;
+}
+
+.details-no-img {
+  position: relative;
+  top: 0;
+}
+
+.upload-photo {
+  z-index: 1;
+  position: fixed;
+  bottom: 10vh;
+  background-color: #012af4;
+  width: 80vw;
+  height: 60px;
+  border-radius: 50px;
+  margin-left: 10vw;
+  left: 0;
+}
+
+.upload-photo-details {
+  z-index: 1;
+  position: fixed;
+  bottom: 5vh;
+  background-color: #012af4;
+  width: 80vw;
+  height: 60px;
+  border-radius: 50px;
+  margin-left: 10vw;
+  left: 0;
+}
+
+.upload-photo-text {
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+}
+
+.location-search-input {
+  position: fixed;
+  border: none !important;
+  top: 10vh;
+  height: 60px;
+  border-radius: 50px;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 15px;
+  margin-left: 10vw;
+  box-sizing: border-box;
+  width: 80vw;
+  z-index: 1;
+}
+
+.autocomplete-dropdown-container {
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  top: calc(10vh + 60px);
+  z-index: 2;
+  border-radius: 50px;
+}
+
+.suggestion-item {
+  padding: 10px 0;
+}
+
+.upload-photo-wrapper {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  z-index: 1;
+  position: fixed;
+  bottom: 5vw;
+  background-color: #012af4;
+  border-radius: 50px;
+  left: 5vw;
+}
+
+.upload-photo-wrapper-right {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  z-index: 1;
+  position: fixed;
+  bottom: 5vw;
+  background-color: #012af4;
+  color: white;
+  border-radius: 50px;
+  right: 5vw;
+}
+
+.take-video-wrapper {
+  width: 100vw !important;
+  height: 1000px !important;
+  position: fixed;
+}
+
+.webcam-wrapper {
+  background-color: black;
+}
+
+#webcam {
+}
+
+#download-photo {
+  width: 100%;
+  height: 80%;
+  display: none;
+}

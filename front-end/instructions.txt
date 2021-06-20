@@ -1,0 +1,7 @@
+1. clean app.js and insert GoogleMap component
+2. install google-map-react - https://www.npmjs.com/package/google-maps-react - 'npm install --save google-maps-react', search on page 'component directly to an existing <Marker /> component by using a marker prop.' and copy paste code below into GoogleMap component.
+3. top of 2. page, insert export default GoogleApiWrapper()() part with your own Google Map API key. insert string Google Maps API key, insert proper imports at top.
+4. set initialCenter and center of Map to Vancouver and in the state variable area.
+5. install react Google Maps places autocomplete - https://www.npmjs.com/package/react-places-autocomplete - 'npm install --save react-places-autocomplete' - import the variables and insert script in the index.html code section.
+6. import code from example code on https://www.npmjs.com/package/react-places-autocomplete top area of page
+7. in handleSelect function, add the setState to change address to the updated address variable.
