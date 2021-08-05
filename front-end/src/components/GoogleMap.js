@@ -9,8 +9,8 @@ import axios from "axios";
 import FormData, { from } from "form-data";
 import { Camera } from "./Camera";
 
-const apiUrl = "http://d16a8647b722.ngrok.io";
-
+const apiUrl = "SERVER_URL";
+const apiKey = "GOOGLE_MAP_API_KEY";
 const MapCountainer = (props) => {
   const [currLocation, setCurrLocation] = useState(null);
   const [markers, setMarkers] = useState(null);
@@ -25,7 +25,6 @@ const MapCountainer = (props) => {
     setAllMarkers(response.data);
     console.log("reponse", response);
   }, []);
-
   const [allMarkers, setAllMarkers] = useState([]);
   const [placingMarker, setPlacingMarker] = useState(false);
   const [state, setState] = useState({
@@ -43,6 +42,13 @@ const MapCountainer = (props) => {
       lng: 0,
     },
   });
+
+  useEffect(async () => {
+    console.log("------------------->");
+    const response = await axios.get(`${apiUrl}/api/map/markers/`);
+    setAllMarkers(response.data);
+    console.log("reponse", response);
+  }, [state]);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -114,6 +120,7 @@ const MapCountainer = (props) => {
   }, []);
 
   const onMarkerClick = (props, marker, e) => {
+    console.log("marker", marker);
     setState({
       ...state,
       selectedPlace: props,
@@ -207,7 +214,7 @@ const MapCountainer = (props) => {
 
     // console.log("curr marker locaiton", latLngstr);
     const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=44,44&key=AIzaSyDQeimZ39H_n6iAHIa-QK5AcYZQ7B5FULg`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=44,44&key=${api_key}`
     );
 
     setCurrLocationAddress(response.data.results?.[0]?.formatted_address);
@@ -220,7 +227,6 @@ const MapCountainer = (props) => {
 
   const addMarkerHandler = () => {
     alert("add marker in map");
-    console.log(state.activeMarker);
     props.google.maps.event.addListener(
       mapRef.current.map,
       "click",
@@ -323,6 +329,7 @@ const MapCountainer = (props) => {
                       key={Math.random()}
                       onClick={() => onMarkerClick(null, marker)}
                       name={marker.name}
+                      icon={MainIcon}
                       position={{
                         lat: marker?.lat,
                         lng: marker?.lng,
@@ -350,13 +357,19 @@ const MapCountainer = (props) => {
               </Map>
               {state.showingInfoWindow ? (
                 <div className={"details-wrapper"}>
-                  {console.log("state", state.activeMarker)}
-                  {state.activeMarker?.image ? (
-                    <img src={state.activeMarker?.image} />
+                  {console.log(
+                    "state",
+                    state.activeMarker?.images[0].image.fullSize
+                  )}
+                  {state.activeMarker?.images ? (
+                    <img
+                      style={{ width: 200, height: 200 }}
+                      src={state.activeMarker?.images[0].image.fullSize}
+                    />
                   ) : (
                     <div className="details-no-imgs">No images</div>
                   )}
-                  <div>location - {currLocationAddress}</div>
+                  {/* <div>location - {currLocationAddress}</div> */}
                   <button
                     onClick={() =>
                       setState({ ...state, showingInfoWindow: false })
@@ -364,14 +377,14 @@ const MapCountainer = (props) => {
                   >
                     close
                   </button>
-                  <button
+                  {/* <button
                     className="upload-photo-details"
                     onClick={() => {
                       setState({ ...state, takingPhoto: true });
                     }}
                   >
                     <div className="upload-photo-text">ატვირთე ფოტო</div>
-                  </button>
+                  </button> */}
                 </div>
               ) : (
                 <>
@@ -403,5 +416,5 @@ const MapCountainer = (props) => {
 };
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyDQeimZ39H_n6iAHIa-QK5AcYZQ7B5FULg",
+  apiKey,
 })(MapCountainer);
